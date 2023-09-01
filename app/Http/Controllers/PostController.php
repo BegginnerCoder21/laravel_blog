@@ -34,10 +34,12 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $imagePath = $request->image->store('postImages');
-        Post::create([
+        $post = Post::create([
             'title' =>$request->title,
             'content' => $request->content,
-            'images' => $imagePath
+            'images' => $imagePath,
+            'user_id' => auth()->user()->id,
+            'category_id' => $request->category
         ]);
         return redirect()->route('post.index')->with('successCreating','votre article a bien été crée');
     }
@@ -54,7 +56,7 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Post $post)
-    {   dd($post);
+    { 
         $categories = Category::all();
         return view('posts.edit',compact('post','categories'));
     }
@@ -62,7 +64,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {    
         if(!$request->image){
             $imageRequest = $post->images;
@@ -72,7 +74,8 @@ class PostController extends Controller
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
-            'images' => $imageRequest
+            'images' => $imageRequest,
+            'category_id' => $request->category
         ]);
 
        return redirect()->route('post.index')->with('success','votre poste a bien été modifié');

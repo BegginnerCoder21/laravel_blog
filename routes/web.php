@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PostController::class,'index'])->name('post.index');
 
+
 Route::get('/dashboard',DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 

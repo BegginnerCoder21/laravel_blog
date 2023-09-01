@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {   if(request()->routeIs('post.store')){
             $imageRules = 'image|required';
-        }else{
+        }else if('post.update'){
             $imageRules = 'image|sometimes';
         }
         return [

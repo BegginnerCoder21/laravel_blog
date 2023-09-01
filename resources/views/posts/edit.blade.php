@@ -4,12 +4,16 @@
             Editer {{$post->title}}
         </h2>
     </x-slot>
-    @foreach ($errors->all() as $error)
-        <span> {{$error}} </span>
-    @endforeach
+
     <form action="{{route('post.update',$post)}}" method="post" enctype="multipart/form-data" class="flex flex-col p-10 w-[600px]">
         @csrf
         @method('PUT')
+
+        @foreach ($errors->all() as $error)
+                <div class="text-red-500 mt-2xx">
+                    {{$error}}
+                </div>
+            @endforeach
         <x-input-label for="title"  class="text-xl">Title</x-input-label>
         <x-text-input name="title" id="title" value="{{$post->title}}">  </x-text-input>
 

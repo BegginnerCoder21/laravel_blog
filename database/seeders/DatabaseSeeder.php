@@ -22,13 +22,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $categories = Category::factory()->count(5)->create();
-
-        User::factory()->count(10)->create()->each(function ($user) use($categories) {
-            Post::factory()->count(rand(2,4))->create([
-                'user_id' => $user->id,
-                'category_id' => ($categories->random(1)->first())->id,
-            ]);
+        $categories = Category::factory(5)->create();
+        User::factory(10)->create()->each(function ($user) use ($categories){
+           Post::factory(rand(2,4))->create([
+            'user_id' => $user->id,
+            'category_id' => $categories->random()->first()->id
+           ]);
         });
         
     }

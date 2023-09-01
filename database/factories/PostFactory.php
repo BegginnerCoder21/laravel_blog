@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(rand(3,7),true),
             'content' => fake()->sentences(10,true),
-            'images' => 'https://via.placeholder.com/1000'
+            'images' => 'https://via.placeholder.com/1000',
         ];
     }
 }

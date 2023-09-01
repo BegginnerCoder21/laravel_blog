@@ -39,26 +39,29 @@
                     @if (session('successSup'))
                         <h1 class="text-red-400"> {{session('successSup')}} </h1>
                     @endif
-                    @foreach ($posts as $post)
-                        <div class="mt-6">
-                            <div class="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-                                <div class="flex items-center justify-between"><span class="font-light text-gray-600">{{$post->created_at}} </span><a href="#"
-                                        class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"> {{$post->category->name}} </a>
-                                </div>
-                                <div class="mt-2"><a href="{{route('post.show',$post)}}" class="text-2xl font-bold text-gray-700 hover:underline"> {{$post->title}} </a>
-                                    <p class="mt-2 text-gray-600"> {{Str::limit($post->content,100) }} </p>
-                                </div>
-                                <div class="flex items-center justify-between mt-4"><a href="#"
-                                        class="text-blue-500 hover:underline">Voir plus</a>
-                                    <div><a href="#" class="flex items-center"><img
-                                                src="{{$post->images}}"
-                                                alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
-                                            <h1 class="font-bold text-gray-700 hover:underline"> {{$post->user->name}} </h1>
-                                        </a></div>
-                                </div>
+                    @forelse ($posts as $post)
+                    <div class="mt-6">
+                        <div class="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
+                            <div class="flex items-center justify-between"><span class="font-light text-gray-600">{{$post->created_at}} </span><a href="#"
+                                    class="px-2 py-1 font-bold text-gray-100 bg-gray-600 rounded hover:bg-gray-500"> {{$post->category->name}} </a>
                             </div>
-                        </div> 
-                    @endforeach
+                            <div class="mt-2"><a href="{{route('post.show',$post)}}" class="text-2xl font-bold text-gray-700 hover:underline"> {{$post->title}} </a>
+                                <p class="mt-2 text-gray-600"> {{Str::limit($post->content,100) }} </p>
+                            </div>
+                            <div class="flex items-center justify-between mt-4"><a href="#"
+                                    class="text-blue-500 hover:underline">Voir plus</a>
+                                <div><a href="#" class="flex items-center"><img
+                                            src="{{$post->images}}"
+                                            alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
+                                        <h1 class="font-bold text-gray-700 hover:underline"> {{$post->user->name}} </h1>
+                                    </a></div>
+                            </div>
+                        </div>
+                    </div> 
+                    @empty
+                    <h1 class="font-bold text-gray-700 hover:underline"> Aucun poste trouvé </h1>
+                    @endforelse
+                        
                     <div class="mt-8">
                         <div class="flex">
                             <a href="#" class="px-3 py-2 mx-1 font-medium text-gray-500 bg-white rounded-md cursor-not-allowed">

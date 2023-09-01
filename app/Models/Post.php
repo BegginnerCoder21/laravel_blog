@@ -27,23 +27,22 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function getTitleAttribute($attribute)
-    {
-        return Str::title($attribute);
-    }
+    // public function getTitleAttribute($attribute)
+    // {
+    //     return Str::title($attribute);
+    // }
 
     public static function boot()
     {
         parent::boot();
 
-        self::creating(function ($post) {
-            $post->user()->associate(auth()->user()->id);
-            $post->category()->associate(request()->category);
-        });
+        // self::creating(function ($post) {
+        //     $post->user()->associate(auth()->user()->id);
+        //     $post->category()->associate(request()->category);
+        // });
 
-        static::saving(function ($post) {
-            $post->user()->associate(auth()->user()->id);
-            $post->category()->associate(request()->category);
-        });
+        // self::updating(function ($post) {
+        //     $post->category()->associate(request()->category);
+        // });
     }
 }
